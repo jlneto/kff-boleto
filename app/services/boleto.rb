@@ -5,7 +5,7 @@ class Boleto
 
   def initialize
     BoletoSimples.configure do |c|
-      c.environment = ENV['BOLETOSIMPLES_ENV']
+      c.environment = ENV['BOLETOSIMPLES_ENV'].to_sym
       c.access_token = ENV['BOLETOSIMPLES_ACCESS_TOKEN']
     end
   end
@@ -36,6 +36,7 @@ class Boleto
     log = []
     boletos.each do |boleto|
       log << create( boleto )
+      sleep 0.2
     end
 
     log
@@ -44,8 +45,17 @@ class Boleto
   # Criar um boleto passando os dados dos clientes
   # Não vamos salvar clientes pois os dados podem mudar
   def create(boleto_hash)
-    BoletoSimples::BankBillet.create(boleto_hash)
+    @bank_billet = BoletoSimples::BankBillet.create(boleto_hash)
+    if @bank_billet.persisted?
+      puts "Sucesso :)"
+      puts @bank_billet.attributes
+    else
+      puts "Erro :("
+      puts @bank_billet.response_errors
+    end
+    @bank_billet
   rescue => e
+    puts e.message
     e.message
   end
 
