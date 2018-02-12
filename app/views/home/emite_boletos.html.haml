@@ -1,0 +1,7 @@
+%h1 Resultado da Emissão dos boletos
+
+%pre
+  - @logs.each do |log|
+    %li= log
+
+= link_to 'Voltar', root_path

@@ -1,0 +1,32 @@
+%h2 Importar Boletos
+
+%p Informe aqui o excel com os dados dos Boletos.
+
+= form_tag home_emite_boletos_path, multipart: true do
+  %p
+    %label Token da API do Boleto Simples:
+    = text_field_tag :token, session['BOLETO_TOKEN']
+  %p
+    %label Planilha (XLS) com os Boletos:
+    = file_field_tag :file
+  %p
+    = submit_tag "Importar", class: 'btn btn-primary'
+
+
+%p Esperamos uma planilha com as seguintes colunas (nessa ordem)
+%ul
+  %li Ítem para cobrança*
+  %li Valor*
+  %li Vencimento*
+  %li Destinatário*
+  %li CPF/CNPJ*
+  %li Telefone*
+  %li E-mail
+  %li CEP
+  %li Rua
+  %li Número
+  %li Complemento
+  %li Bairro
+  %li Cidade
+  %li Periodicidade
+
