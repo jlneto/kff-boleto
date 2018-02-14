@@ -7,7 +7,7 @@
     %label Token da API do Boleto Simples:
     = text_field_tag :token, session['BOLETO_TOKEN']
   %p
-    %label Planilha (XLS) com os Boletos:
+    %label Planilha (XLSX) com os Boletos:
     = file_field_tag :file
   %p
     = submit_tag "Importar", class: 'btn btn-primary'
