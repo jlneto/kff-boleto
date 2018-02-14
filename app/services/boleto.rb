@@ -38,8 +38,9 @@ class Boleto
 
     log = []
     boletos.each do |boleto|
-      log << create( boleto )
-      sleep 0.2
+      creation_log = create( boleto )
+      log << creation_log if creation_log
+      sleep 0.1
     end
 
     log
@@ -50,12 +51,12 @@ class Boleto
   def create(boleto_hash)
     bank_billet = BoletoSimples::BankBillet.create(boleto_hash)
     if bank_billet.persisted?
-      response = bank_billet.attributes
+      response = nil #bank_billet.attributes
     else
       response = bank_billet.response_errors
       response[:dados_informados] = boleto_hash
     end
-    puts response
+    puts response if response
     response
   rescue => e
     puts e.message
