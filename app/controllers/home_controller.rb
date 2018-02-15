@@ -6,9 +6,11 @@ class HomeController < ApplicationController
   def emite_boletos
     xls_file = params[:file].path
     token = params[:token]
+    environment = params[:environment] || :sandbox
     if token && xls_file
       session['BOLETO_TOKEN'] = params[:token]
-      boleto_simples_service = Boleto.new(token)
+      session['BOLETO_ENV'] = params[:environment]
+      boleto_simples_service = Boleto.new(token, environment)
       @logs = boleto_simples_service.create_from_xls(xls_file)
     else
       flash[:error] = 'Informe o arquivo e o Token'

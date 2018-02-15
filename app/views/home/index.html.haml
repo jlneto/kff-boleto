@@ -4,6 +4,16 @@
 
 = form_tag home_emite_boletos_path, multipart: true do
   %p
+    %label Ambiente:
+    %br
+    = radio_button_tag :environment, :production, (session['BOLETO_ENV'] == 'production')
+    Produção
+    %br
+    = radio_button_tag :environment, :sandbox, (session['BOLETO_ENV'] == 'sandbox')
+    Teste
+    %br
+
+  %p
     %label Token da API do Boleto Simples:
     = text_field_tag :token, session['BOLETO_TOKEN']
   %p
