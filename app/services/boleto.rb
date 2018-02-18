@@ -20,6 +20,8 @@ class Boleto
       phone = phone.tr('() -', '') if phone
       cpf = workbook.row(row)[4].to_s
       cpf = cpf.tr('. -', '').rjust(11, '0') if cpf
+      tags = workbook.row(row)[14]
+      tags = tags.split(' ') if tags
       boletos << {
           description: workbook.row(row)[0],
           amount: workbook.row(row)[1],
@@ -36,6 +38,8 @@ class Boleto
           customer_city_name: workbook.row(row)[12],
           customer_state: ('SP' ||  workbook.row(row)[14]),
           customer_person_type: 'individual',
+          document_type: '99',
+          tags: tags
       }
     end
 
