@@ -44,11 +44,15 @@ class Boleto
     end
 
     log = []
+    log << "Enviando os registros para API #{Time.now}"
+    log << "Temos #{boletos.size} boletos para enviar"
+    log << 'Qualquer erro que de na criação do boleto, uma mensagem será mostrada abaixo, caso contrário ele foi criado com sucesso'
     boletos.each do |boleto|
       creation_log = create( boleto )
       log << creation_log if creation_log
       sleep 0.1
     end
+    log << "Terminado: #{Time.now}"
 
     log
   end
