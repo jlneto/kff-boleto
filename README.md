@@ -15,3 +15,12 @@ Tipos
 http://www.kartodromogranjaviana.net.br/resultados/resultados_lista.php
 http://www.kartodromogranjaviana.net.br/resultados/resultados_lista.php?tipo=1&p=2
 http://www.kartodromogranjaviana.net.br/resultados/resultados_folha.php?tipo=3&id=44818
+
+
+
+DEPLOY
+======
+
+Para fazer deploy execute  o seguinte comando
+
+    git push heroku master
