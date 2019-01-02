@@ -17,9 +17,9 @@ class Boleto
     ((workbook.first_row + 1)..workbook.last_row).each do |row|
       cep = workbook.row(row)[7].to_s
       phone = workbook.row(row)[5]
-      phone = phone.tr('() -', '') if phone
+      phone = phone.to_s.tr('() -', '') if phone
       cpf = workbook.row(row)[4].to_s
-      cpf = cpf.tr('. -', '').rjust(11, '0') if cpf
+      cpf = cpf.to_s.tr('. -', '').rjust(11, '0') if cpf
       tags = workbook.row(row)[14]
       tags = tags.split(' ') if tags
       boletos << {
